@@ -78,6 +78,14 @@ document.getElementById("add-money-btn").addEventListener("click", function (e){
     const totalNewAvailableBalance = amount + availableBalance;
 
     setInnerText(totalNewAvailableBalance);
+
+    const data = {
+        name:"Add Money",
+        date:new Date().toLocaleTimeString()
+    }
+
+    transactionData.push(data)
+    console.log(transactionData)
    
 
 });
@@ -103,11 +111,47 @@ document.getElementById("withdraw-btn").addEventListener("click", function (e) {
 
   setInnerText(totalNewAvailableBalance);
 
+  const data = {
+        name:"Cash Out",
+        date:new Date().toLocaleTimeString()
+    }
+
+    transactionData.push(data)
+    console.log(transactionData)
+
   });
 
+  //transactions feature
+document.getElementById("transactions-button").addEventListener("click",function(){
+    const transactionContainer = document.getElementById("transaction-container")
+    transactionContainer.innerText = ""
 
-  // toggling feature
+    for(const data of transactionData){
+        const div = document.createElement("div")
+        div.innerHTML=`
+        <div class=" bg-white rounded-xl p-3 flex justify-between items-center mt-3">
+              <div class="flex items-center">
+                  <div class="p-3 rounded-full bg-[#f4f5f7]">
+                    <img src="./assets/wallet1.png" class="mx-auto" alt="" />
+                  </div>
+                  <div class="ml-3">
+                    <h1>${data.name}</h1>
+                    <p>${data.date}</p>
+                  </div>
+              </div>
+      
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        `
 
+        transactionContainer.appendChild(div)
+
+
+    }
+})
+
+
+// toggling features
   document.getElementById("add-button").addEventListener("click",function(e) {
      handleToggle("add-money-parent")
 
